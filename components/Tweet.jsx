@@ -7,6 +7,9 @@ import { Fontisto } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
 import { Colors } from '@/constants/Colors'
+import { useRouter } from 'expo-router';
+
+const router = useRouter();
 
 export default function Tweet() {
 
@@ -16,7 +19,7 @@ export default function Tweet() {
     return (
         <View style={styles.container}>
 
-            <View style={styles.containerContent}>
+            <Pressable onPress={() => router.push('/profile')} style={styles.containerContent}>
                 <Image
                     style={styles.profileImage}
                     source={user.profileImageUrl}
@@ -25,7 +28,7 @@ export default function Tweet() {
                     <Text style={styles.name}>{user.name}</Text>
                     <Text>@{user.username}</Text>
                 </View>
-            </View>
+            </Pressable>
 
             <Text style={styles.tweetContent}>{tweet.content}</Text>
 

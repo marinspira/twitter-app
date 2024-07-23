@@ -4,6 +4,7 @@ import { Image, StyleSheet, View } from 'react-native'
 import twitter from '@/assets/images/logo.png'
 import mockData from '@/data'
 import { AntDesign } from '@expo/vector-icons';
+import ProfileImg from '@/components/ProfileImg'
 
 export default function Header() {
 
@@ -11,7 +12,7 @@ export default function Header() {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.icon} source={user.profileImageUrl} alt="User icon" />
+            <ProfileImg user={user} width={32} />
             <Image source={twitter} alt="Twitter logo" />
             <AntDesign name="setting" size={24} color={Colors.light.primary} />
         </View>
@@ -29,9 +30,4 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: 20
     },
-    icon: {
-        width: 32,
-        height: 32,
-        borderRadius: 100
-    }
 })
