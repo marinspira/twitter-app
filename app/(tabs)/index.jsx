@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Platform, View, Pressable } from 'react-native';
-import Tweet from "@/components/Tweet"
+import Tweets from "@/components/Tweets"
 import Header from '@/components/Header'
 import { AntDesign } from '@expo/vector-icons';
 import { Colors } from '@/constants/Colors';
@@ -12,7 +12,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Header />
-      <Tweet />
+      <Tweets />
       <Pressable onPress={() => router.push('/new')} style={styles.newTweetBtn}>
         <AntDesign name="plus" size={24} color="white" />
       </Pressable>

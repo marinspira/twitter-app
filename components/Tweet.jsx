@@ -1,12 +1,11 @@
 import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
-import mockData from '../data'
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import mockData from '@/data'
 import { FontAwesome6 } from '@expo/vector-icons'
 import { Ionicons } from '@expo/vector-icons'
 import { Fontisto } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import { Feather } from '@expo/vector-icons'
-import timeDifference from '@/utils/timeDifference.js'
 import { Colors } from '@/constants/Colors'
 
 export default function Tweet() {
@@ -16,36 +15,40 @@ export default function Tweet() {
 
     return (
         <View style={styles.container}>
-            <Image
-                style={styles.profileImage}
-                source={user.profileImageUrl}
-            />
+
             <View style={styles.containerContent}>
+                <Image
+                    style={styles.profileImage}
+                    source={user.profileImageUrl}
+                />
                 <View style={styles.profileContainer}>
                     <Text style={styles.name}>{user.name}</Text>
                     <Text>@{user.username}</Text>
-                    <Text>{timeDifference(tweet.timestamp)}</Text>
                 </View>
-                <Text style={styles.tweetContent}>{tweet.content}</Text>
-                <View style={styles.actions}>
-                    <View style={styles.action}>
-                        <Ionicons name="chatbubble-outline" size={14} color="black" />
-                        <Text>{tweet.replies.length}</Text>
-                    </View>
-                    <View style={styles.action}>
-                        <FontAwesome6 name="retweet" size={14} color="black" />
-                        <Text>{tweet.retweets}</Text>
-                    </View>
-                    <View style={styles.action}>
-                        {tweet.isLiked ?
-                            <Fontisto name="heart" size={14} color="red" />
-                            :
-                            <AntDesign name="hearto" size={14} color="black" />
-                        }
-                        <Text>{tweet.likes}</Text>
-                    </View>
-                    <Feather name="share" size={14} color="black" />
+            </View>
+
+            <Text style={styles.tweetContent}>{tweet.content}</Text>
+
+            <View style={styles.activy}>
+                <Text>{tweet.retweets} Retweets</Text>
+                <Text>{tweet.likes} Likes</Text>
+            </View>
+
+            <View style={styles.actions}>
+                <View style={styles.action}>
+                    <Ionicons name="chatbubble-outline" size={14} color="black" />
                 </View>
+                <View style={styles.action}>
+                    <FontAwesome6 name="retweet" size={14} color="black" />
+                </View>
+                <View style={styles.action}>
+                    {tweet.isLiked ?
+                        <Fontisto name="heart" size={14} color="red" />
+                        :
+                        <AntDesign name="hearto" size={14} color="black" />
+                    }
+                </View>
+                <Feather name="share" size={14} color="black" />
             </View>
         </View>
     )
@@ -54,8 +57,6 @@ export default function Tweet() {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        display: 'flex',
-        flexDirection: 'row',
         justifyContent: 'center',
         gap: 8,
         width: '100%',
@@ -64,8 +65,7 @@ const styles = StyleSheet.create({
     },
     profileContainer: {
         display: 'flex',
-        flexDirection: 'row',
-        gap: 5
+        flexDirection: 'column',
     },
     profileImage: {
         width: 55,
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         gap: 40,
-        justifyContent: 'space-between'
+        justifyContent: 'space-around',
+        paddingTop: 10
     },
     action: {
         display: 'flex',
@@ -93,6 +94,18 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     containerContent: {
-        width: '85%'
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10
     },
+    activy: {
+        display: 'flex',
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
+        borderColor: Colors.light.secondary,
+        paddingVertical: 10,
+        gap: 15
+    }
 })
