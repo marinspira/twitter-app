@@ -3,11 +3,11 @@ import me from '@/assets/images/me.jpg'
 const mockData = {
   user: {
     id: "1",
-    username: "johndoe",
-    name: "John Doe",
+    username: "maria",
+    name: "Maria Ferreira",
     profileImageUrl: me,
     bio: "Software developer. Tech enthusiast. Avid reader.",
-    location: "San Francisco, CA",
+    location: "Brazil",
     website: "https://johndoe.com",
     followersCount: 1200,
     followingCount: 300,

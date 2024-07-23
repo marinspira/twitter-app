@@ -1,12 +1,13 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import mockData from '../data'
-import { FontAwesome6 } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import me from '@/assets/images/me.jpg'
+import { FontAwesome6 } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
+import { Fontisto } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
+import timeDifference from '@/utils/timeDifference.js'
+import { Colors } from '@/constants/Colors'
 
 export default function Tweet() {
 
@@ -15,29 +16,32 @@ export default function Tweet() {
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: user.profileImageUrl }} alt={user.name} />
             <Image
                 style={styles.profileImage}
-                source={require('@/assets/images/me.jpg')}
+                source={user.profileImageUrl}
             />
-            <View>
+            <View style={styles.containerContent}>
                 <View style={styles.profileContainer}>
-                    <Text>{user.name}</Text>
+                    <Text style={styles.name}>{user.name}</Text>
                     <Text>@{user.username}</Text>
-                    <Text>{tweet.timestamp}</Text>
+                    <Text>{timeDifference(tweet.timestamp)}</Text>
                 </View>
                 <Text style={styles.tweetContent}>{tweet.content}</Text>
                 <View style={styles.actions}>
                     <View style={styles.action}>
-                        <Ionicons name="chatbubble-outline" size={12} color="black" />
+                        <Ionicons name="chatbubble-outline" size={14} color="black" />
                         <Text>{tweet.replies.length}</Text>
                     </View>
                     <View style={styles.action}>
-                        <FontAwesome6 name="retweet" size={12} color="black" />
+                        <FontAwesome6 name="retweet" size={14} color="black" />
                         <Text>{tweet.retweets}</Text>
                     </View>
                     <View style={styles.action}>
-                        {tweet.isLiked ? <Fontisto name="heart" size={12} color="red" /> : <AntDesign name="hearto" size={12} color="black" />}
+                        {tweet.isLiked ?
+                            <Fontisto name="heart" size={14} color="red" />
+                            :
+                            <AntDesign name="hearto" size={14} color="black" />
+                        }
                         <Text>{tweet.likes}</Text>
                     </View>
                     <Feather name="share" size={14} color="black" />
@@ -53,7 +57,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        gap: 8
+        gap: 8,
+        width: '100%',
+        borderBottomWidth: 1,
+        borderColor: Colors.light.secondary
     },
     profileContainer: {
         display: 'flex',
@@ -66,7 +73,8 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
     tweetContent: {
-        marginVertical: 8
+        marginVertical: 8,
+        fontSize: 16
     },
     actions: {
         display: 'flex',
@@ -80,5 +88,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         gap: 5
-    }
+    },
+    name: {
+        fontWeight: '600'
+    },
+    containerContent: {
+        width: '85%'
+    },
 })
